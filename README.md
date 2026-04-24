@@ -52,6 +52,7 @@ This will:
 - Copy scripts to `~/bin/` and make them executable
 - Copy the homepage to `~/homepage/`
 - Install autostart `.desktop` entries to `~/.config/autostart/`
+- Write a Chromium managed policy to `/etc/chromium/policies/managed/pi-media.json` that sets the home button to the local launcher page
 
 ### 4. Test the CEC monitor manually
 
@@ -83,7 +84,13 @@ cd ~/pi-home-media-player && git pull && bash install.sh
 
 ### `cec-monitor.sh`
 
-Watches the HDMI-CEC bus. When the projector goes to standby, it pauses playback and turns off the HDMI output. When the projector becomes the active source again, it restores the display.
+Watches the HDMI-CEC bus. When the projector goes to standby, it pauses playback and turns off the HDMI output. When the projector becomes the active source again, it restores the display. Matches both human-readable CEC text and raw hex opcodes (`0x36` standby, `0x82`/`0x04`/`0x0D` wake) to handle projectors that don't broadcast standard text events.
+
+If events aren't being detected, run in debug mode to inspect exactly what your projector sends:
+
+```bash
+~/bin/cec-monitor.sh --debug
+```
 
 ### `low-power.sh`
 
@@ -97,7 +104,7 @@ Watches the HDMI-CEC bus. When the projector goes to standby, it pauses playback
 
 A dark-themed local HTML page with big keyboard-navigable buttons for each streaming service. Arrow keys move between buttons; Enter opens the selected service.
 
-Set as Chromium's homepage in `chrome://settings`, or launch automatically in kiosk mode via the autostart entry.
+The home button in Chromium is configured automatically by `install.sh` via a managed policy — it will always return to this page. The policy also suppresses the default new-tab shortcuts page. No manual `chrome://settings` changes needed.
 
 **Local Media** links to `http://localhost:8096` (Jellyfin default port). Update this URL if you use a different media server or address.
 
