@@ -19,19 +19,11 @@
       gap: 2rem;
     }
 
-    h1 {
-      font-size: 1.4rem;
-      font-weight: 300;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: #888;
-    }
-
     .grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
-      width: min(900px, 90vw);
+      width: min(960px, 90vw);
     }
 
     .card {
@@ -40,91 +32,146 @@
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
-      height: 160px;
+      height: 168px;
       border-radius: 12px;
-      border: 2px solid #222;
       background: #141414;
-      color: #fff;
+      border: 1px solid #222;
+      border-top: 5px solid var(--brand);
       text-decoration: none;
-      font-size: 1.4rem;
-      font-weight: 600;
-      letter-spacing: 0.03em;
-      transition: background 0.15s, border-color 0.15s, transform 0.1s;
-      cursor: pointer;
       outline: none;
-    }
-
-    .card .icon {
-      font-size: 2.4rem;
+      transition: background 0.15s, transform 0.12s;
+      cursor: pointer;
     }
 
     .card:hover,
     .card:focus {
-      background: #1e1e1e;
-      border-color: #fff;
-      transform: scale(1.03);
+      background: #1d1d1d;
+      transform: scale(1.04);
+      box-shadow: 0 0 0 2px rgba(255,255,255,0.15);
     }
 
-    .card.netflix   { border-color: #333; }
-    .card.hbo       { border-color: #333; }
-    .card.disney    { border-color: #333; }
-    .card.youtube   { border-color: #333; }
-    .card.hulu      { border-color: #333; }
-    .card.local     { border-color: #333; }
+    .card.netflix { --brand: #E50914; }
+    .card.max     { --brand: #0632FF; }
+    .card.disney  { --brand: #113CCF; }
+    .card.youtube { --brand: #FF0000; }
+    .card.hulu    { --brand: #1CE783; }
+    .card.local   { --brand: #555; }
 
-    .card:focus {
-      border-color: #fff;
-      box-shadow: 0 0 0 3px rgba(255,255,255,0.25);
+    /* ── Netflix ── bold red wordmark */
+    .netflix-wordmark {
+      font-family: 'Arial Black', Impact, sans-serif;
+      font-weight: 900;
+      font-size: 2rem;
+      letter-spacing: 0.14em;
+      color: #E50914;
+    }
+
+    /* ── Max ── white bold lowercase */
+    .max-wordmark {
+      font-family: Arial, sans-serif;
+      font-weight: 800;
+      font-size: 3.4rem;
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+
+    /* ── Disney+ ── white bold with blue plus */
+    .disney-wordmark {
+      font-family: Arial, sans-serif;
+      font-weight: 800;
+      font-size: 2rem;
+      font-style: italic;
+      color: #fff;
+    }
+    .disney-wordmark .plus {
+      color: #4B9FE1;
+    }
+
+    /* ── Hulu ── brand green lowercase */
+    .hulu-wordmark {
+      font-family: Arial, sans-serif;
+      font-weight: 700;
+      font-size: 2.8rem;
+      letter-spacing: 0.04em;
+      color: #1CE783;
+    }
+
+    /* ── Local Media label ── */
+    .local-label {
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #666;
     }
 
     .hint {
       font-size: 0.8rem;
-      color: #444;
+      color: #3a3a3a;
       letter-spacing: 0.1em;
     }
   </style>
 </head>
 <body>
 
-  <h1>Home Media</h1>
-
   <div class="grid" id="grid">
+
+    <!-- Netflix: bold red wordmark -->
     <a class="card netflix" href="https://www.netflix.com" tabindex="1">
-      <span class="icon">🎬</span>
-      Netflix
+      <svg viewBox="0 0 56 80" width="36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="0"  y="0" width="15" height="80" fill="#E50914"/>
+        <polygon points="15,0 30,0 41,80 26,80"   fill="#E50914"/>
+        <rect x="41" y="0" width="15" height="80" fill="#E50914"/>
+      </svg>
+      <span class="netflix-wordmark">NETFLIX</span>
     </a>
-    <a class="card hbo" href="https://www.max.com" tabindex="2">
-      <span class="icon">📺</span>
-      Max
+
+    <!-- Max: bold lowercase wordmark -->
+    <a class="card max" href="https://www.max.com" tabindex="2">
+      <span class="max-wordmark">max</span>
     </a>
+
+    <!-- Disney+: italic bold wordmark -->
     <a class="card disney" href="https://www.disneyplus.com" tabindex="3">
-      <span class="icon">✨</span>
-      Disney+
+      <span class="disney-wordmark">Disney<span class="plus">+</span></span>
     </a>
+
+    <!-- YouTube: official play button icon -->
     <a class="card youtube" href="https://www.youtube.com" tabindex="4">
-      <span class="icon">▶️</span>
-      YouTube
+      <svg viewBox="0 0 90 64" width="96" xmlns="http://www.w3.org/2000/svg" aria-label="YouTube">
+        <rect width="90" height="64" rx="14" fill="#FF0000"/>
+        <path d="M37 16 L37 48 L63 32 Z" fill="white"/>
+      </svg>
     </a>
+
+    <!-- Hulu: brand green wordmark -->
     <a class="card hulu" href="https://www.hulu.com" tabindex="5">
-      <span class="icon">🟢</span>
-      Hulu
+      <span class="hulu-wordmark">hulu</span>
     </a>
+
+    <!-- Local Media: server icon -->
     <a class="card local" href="http://localhost:8096" tabindex="6">
-      <span class="icon">💾</span>
-      Local Media
+      <svg viewBox="0 0 24 24" width="46" fill="none" stroke="#666" stroke-width="1.5"
+           stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="2" y="2"  width="20" height="8" rx="2"/>
+        <rect x="2" y="14" width="20" height="8" rx="2"/>
+        <circle cx="6.5" cy="6"  r="1.1" fill="#666" stroke="none"/>
+        <circle cx="6.5" cy="18" r="1.1" fill="#666" stroke="none"/>
+      </svg>
+      <span class="local-label">Local Media</span>
     </a>
+
   </div>
 
   <p class="hint">Arrow keys to navigate &nbsp;·&nbsp; Enter to open</p>
 
   <script>
-    // Arrow-key grid navigation (3 columns)
     const COLS = 3;
     const cards = Array.from(document.querySelectorAll('.card'));
 
     document.addEventListener('keydown', (e) => {
       const focused = document.activeElement;
       const idx = cards.indexOf(focused);
+
       if (idx === -1) {
         if (['ArrowRight','ArrowLeft','ArrowDown','ArrowUp'].includes(e.key)) {
           cards[0].focus();
@@ -134,19 +181,16 @@
       }
 
       let next = idx;
-      if (e.key === 'ArrowRight') next = idx + 1;
-      else if (e.key === 'ArrowLeft') next = idx - 1;
-      else if (e.key === 'ArrowDown') next = idx + COLS;
-      else if (e.key === 'ArrowUp') next = idx - COLS;
+      if      (e.key === 'ArrowRight') next = idx + 1;
+      else if (e.key === 'ArrowLeft')  next = idx - 1;
+      else if (e.key === 'ArrowDown')  next = idx + COLS;
+      else if (e.key === 'ArrowUp')    next = idx - COLS;
       else return;
 
       e.preventDefault();
-      if (next >= 0 && next < cards.length) {
-        cards[next].focus();
-      }
+      if (next >= 0 && next < cards.length) cards[next].focus();
     });
 
-    // Focus first card on load
     cards[0].focus();
   </script>
 

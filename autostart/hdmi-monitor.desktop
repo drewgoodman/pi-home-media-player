@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=HDMI Monitor
+Exec=/home/YOUR_USERNAME/bin/hdmi-monitor.sh
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
