@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Home Media</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0a0a0a;
+      color: #fff;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #888;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      width: min(900px, 90vw);
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      height: 160px;
+      border-radius: 12px;
+      border: 2px solid #222;
+      background: #141414;
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.4rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      transition: background 0.15s, border-color 0.15s, transform 0.1s;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .card .icon {
+      font-size: 2.4rem;
+    }
+
+    .card:hover,
+    .card:focus {
+      background: #1e1e1e;
+      border-color: #fff;
+      transform: scale(1.03);
+    }
+
+    .card.netflix   { border-color: #333; }
+    .card.hbo       { border-color: #333; }
+    .card.disney    { border-color: #333; }
+    .card.youtube   { border-color: #333; }
+    .card.hulu      { border-color: #333; }
+    .card.local     { border-color: #333; }
+
+    .card:focus {
+      border-color: #fff;
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.25);
+    }
+
+    .hint {
+      font-size: 0.8rem;
+      color: #444;
+      letter-spacing: 0.1em;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Home Media</h1>
+
+  <div class="grid" id="grid">
+    <a class="card netflix" href="https://www.netflix.com" tabindex="1">
+      <span class="icon">🎬</span>
+      Netflix
+    </a>
+    <a class="card hbo" href="https://www.max.com" tabindex="2">
+      <span class="icon">📺</span>
+      Max
+    </a>
+    <a class="card disney" href="https://www.disneyplus.com" tabindex="3">
+      <span class="icon">✨</span>
+      Disney+
+    </a>
+    <a class="card youtube" href="https://www.youtube.com" tabindex="4">
+      <span class="icon">▶️</span>
+      YouTube
+    </a>
+    <a class="card hulu" href="https://www.hulu.com" tabindex="5">
+      <span class="icon">🟢</span>
+      Hulu
+    </a>
+    <a class="card local" href="http://localhost:8096" tabindex="6">
+      <span class="icon">💾</span>
+      Local Media
+    </a>
+  </div>
+
+  <p class="hint">Arrow keys to navigate &nbsp;·&nbsp; Enter to open</p>
+
+  <script>
+    // Arrow-key grid navigation (3 columns)
+    const COLS = 3;
+    const cards = Array.from(document.querySelectorAll('.card'));
+
+    document.addEventListener('keydown', (e) => {
+      const focused = document.activeElement;
+      const idx = cards.indexOf(focused);
+      if (idx === -1) {
+        if (['ArrowRight','ArrowLeft','ArrowDown','ArrowUp'].includes(e.key)) {
+          cards[0].focus();
+          e.preventDefault();
+        }
+        return;
+      }
+
+      let next = idx;
+      if (e.key === 'ArrowRight') next = idx + 1;
+      else if (e.key === 'ArrowLeft') next = idx - 1;
+      else if (e.key === 'ArrowDown') next = idx + COLS;
+      else if (e.key === 'ArrowUp') next = idx - COLS;
+      else return;
+
+      e.preventDefault();
+      if (next >= 0 && next < cards.length) {
+        cards[next].focus();
+      }
+    });
+
+    // Focus first card on load
+    cards[0].focus();
+  </script>
+
+</body>
+</html>

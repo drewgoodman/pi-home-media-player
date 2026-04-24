@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Chromium Kiosk
+Exec=chromium --kiosk --start-fullscreen --enable-spatial-navigation file:///home/YOUR_USERNAME/homepage/index.html
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=CEC Monitor
+Exec=/home/YOUR_USERNAME/bin/cec-monitor.sh
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
