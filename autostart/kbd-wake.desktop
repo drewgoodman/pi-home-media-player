@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Keyboard Wake Monitor
+Exec=/home/YOUR_USERNAME/bin/kbd-wake.sh
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true

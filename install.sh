@@ -13,13 +13,17 @@ echo ""
 # Install dependencies
 echo "[1/5] Installing dependencies..."
 sudo apt update -q
-sudo apt install -y xdotool git
+sudo apt install -y cec-utils xdotool git
 
 # Install scripts
 echo "[2/5] Installing scripts..."
 mkdir -p "$HOME_DIR/bin"
+cp "$REPO_DIR/scripts/cec-monitor.sh"  "$HOME_DIR/bin/cec-monitor.sh"
+cp "$REPO_DIR/scripts/kbd-wake.sh"     "$HOME_DIR/bin/kbd-wake.sh"
 cp "$REPO_DIR/scripts/hdmi-monitor.sh" "$HOME_DIR/bin/hdmi-monitor.sh"
 cp "$REPO_DIR/scripts/low-power.sh"    "$HOME_DIR/bin/low-power.sh"
+chmod +x "$HOME_DIR/bin/cec-monitor.sh"
+chmod +x "$HOME_DIR/bin/kbd-wake.sh"
 chmod +x "$HOME_DIR/bin/hdmi-monitor.sh"
 chmod +x "$HOME_DIR/bin/low-power.sh"
 
@@ -31,6 +35,8 @@ cp "$REPO_DIR/homepage/index.html" "$HOME_DIR/homepage/index.html"
 # Install autostart entries
 echo "[4/5] Installing autostart entries..."
 mkdir -p "$HOME_DIR/.config/autostart"
+sed "s|YOUR_USERNAME|$USERNAME|g" "$REPO_DIR/autostart/cec-monitor.desktop"     > "$HOME_DIR/.config/autostart/cec-monitor.desktop"
+sed "s|YOUR_USERNAME|$USERNAME|g" "$REPO_DIR/autostart/kbd-wake.desktop"        > "$HOME_DIR/.config/autostart/kbd-wake.desktop"
 sed "s|YOUR_USERNAME|$USERNAME|g" "$REPO_DIR/autostart/hdmi-monitor.desktop"    > "$HOME_DIR/.config/autostart/hdmi-monitor.desktop"
 sed "s|YOUR_USERNAME|$USERNAME|g" "$REPO_DIR/autostart/chromium-kiosk.desktop"  > "$HOME_DIR/.config/autostart/chromium-kiosk.desktop"
 
@@ -52,5 +58,9 @@ echo "=== Done ==="
 echo "Scripts:   $HOME_DIR/bin/"
 echo "Homepage:  file://$HOME_DIR/homepage/index.html"
 echo ""
-echo "Test the HDMI monitor manually before relying on autostart:"
-echo "  ~/bin/hdmi-monitor.sh"
+echo "Test scripts manually before relying on autostart:"
+echo "  ~/bin/cec-monitor.sh --debug   # inspect raw CEC traffic"
+echo "  ~/bin/kbd-wake.sh              # watch for keyboard wake events"
+echo ""
+echo "Shared log file (both monitors write here):"
+echo "  tail -f ~/cec-monitor.log"
