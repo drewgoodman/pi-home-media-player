@@ -10,7 +10,7 @@ log() {
 
 pause_media() {
     local win
-    win=$(xdotool search --onlyvisible --class chromium 2>/dev/null | head -1)
+    win=$(xdotool search --class "[Cc]hromium" 2>/dev/null | head -1)
     if [[ -n "$win" ]]; then
         xdotool windowfocus --sync "$win"
         sleep 0.1
